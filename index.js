@@ -1,29 +1,23 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const connection = require('./database/database')
+const configDB = require('./config/connectionDB')
+const configBodyParser = require('./config/bodyParser')
+const configTemplateEngine = require('./config/templateEngine')
+const routerCategories = require('./controllers/routers/categories')
+const server = require('./config/startServe')
 
 const app = express()
 
-app.set('view engine', 'ejs')
+configTemplateEngine(app, express)
 
-app.use(express.static('public'))
+configBodyParser(app, bodyParser)
 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-
-connection
-  .authenticate()
-  .then(() => {
-    console.log('Banco de dados conectado')
-  })
-  .catch((error) => {
-    console.log(error)
-  })
+configDB()
 
 app.get('/', (req, res) => {
   res.render('index')
 })
 
-app.listen(8080, () => {
-  console.log('servidor funcionando')
-})
+app.use('/', routerCategories)
+
+server(app)
