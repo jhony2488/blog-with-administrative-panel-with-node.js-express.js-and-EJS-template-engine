@@ -2,10 +2,10 @@ const express = require('express')
 
 const router = express.Router()
 
-router.get('/categories', (req, res) => {
+router.get('/articles', (req, res) => {
     res.send('index')
 })
-router.get('/admin/categories/new', (req, res) => {
+router.get('/admin/articles/new', (req, res) => {
     res.send('jhonyyyy')
 })
 
