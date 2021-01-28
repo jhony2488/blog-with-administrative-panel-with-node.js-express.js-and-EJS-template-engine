@@ -1,12 +1,12 @@
-const express = require('express')
+const express = require('express');
 
-const router = express.Router()
+const router = express.Router();
 
 router.get('/categories', (req, res) => {
-  res.send('index')
-})
+  res.send('index');
+});
 router.get('/admin/categories/new', (req, res) => {
-  res.send('jhonyyyy')
-})
+  res.send('jhonyyyy');
+});
 
-module.exports = router
+module.exports = router;
