@@ -1,7 +1,7 @@
 const sequelize = require('sequelize')
-const connection = require('../../config/connectionDB')
+const connection = require('../Connection')
 
-const Category = connection.define('category', {
+const Article = connection.define('articles', {
     title: {
         type: sequelize.STRING,
         allowNull: false,
@@ -10,6 +10,10 @@ const Category = connection.define('category', {
         type: sequelize.STRING,
         allowNull: false,
     },
+    body: {
+        type: sequelize.TEXT,
+        allowNull: false,
+    },
 })
 
-module.exports = Category
+module.exports = Article

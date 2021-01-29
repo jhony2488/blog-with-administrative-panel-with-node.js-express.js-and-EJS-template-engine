@@ -1,4 +1,4 @@
-const connection = require('../models/connection')
+const connection = require('../models/Connection')
 
 function connectionDB() {
   return connection
