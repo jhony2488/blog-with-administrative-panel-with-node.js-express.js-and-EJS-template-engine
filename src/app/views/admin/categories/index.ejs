@@ -1,0 +1,50 @@
+<%- include('../../partials/head.ejs') %>
+<body>
+    <%- include('../../partials/navbar.ejs') %>
+    <div class="container">
+        <br />
+        <h2 class="text-center">Categorias</h2>
+        <div class="text-center">
+            <a href="new" class="btn btn-success"> Criar Novas Categorias </a>
+        </div>
+        <br />
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Titulo</th>
+                    <th>Slug</th>
+                    <th>Açōes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% categories.forEach((category)=>{ %>
+                <tr>
+                    <th><%= category.id %></th>
+                    <th><%= category.title %></th>
+                    <th><%= category.slug %></th>
+                    <th class="col-2">
+                        <div class="d-inline">
+                            <a
+                                href="/admin/categories/edit/<%= category.id %>"
+                                class="text-center btn btn-primary"
+                                >Editar</a
+                            >
+                        </div>
+                        <div class="d-inline">
+                            <a
+                                href="/admin/categories/delete/<%= category.id %>"
+                                class="text-center btn btn-danger"
+                                onclick="confirmDeletion(event)"
+                                >Deletar</a
+                            >
+                        </div>
+                    </th>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+<script src="/js/confirm.js"></script>
+<%- include('../../partials/footer.ejs') %>

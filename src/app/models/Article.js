@@ -1,8 +1,23 @@
-exports.module = (sequelize, DataTypes) => {
-    const Article = sequelize.define('Article', {
-        title: DataTypes.STRING,
-        slug: DataTypes.STRING,
-        body: DataTypes.TEXT,
-    })
-    return Article
+module.exports = (sequelize, DataTypes) => {
+    const Articles = sequelize.define(
+        'Article',
+        {
+            title: DataTypes.STRING,
+            slug: DataTypes.STRING,
+            body: DataTypes.TEXT,
+        },
+        {
+            freezeTableName: true,
+            tableName: 'articles',
+            timestamps: true,
+        }
+    )
+    Articles.associate = function (models) {
+        Articles.belongsTo(models.Categorie, {
+            foreignKey: 'id',
+            as: 'categories',
+        })
+    }
+
+    return Articles
 }

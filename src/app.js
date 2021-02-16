@@ -15,21 +15,16 @@ class AppController {
         this.express.use(express.json())
     }
     routes() {
-        this.express.use(require('./app/controllers/routers/articles'))
-        this.express.use(require('./app/controllers/routers/categories'))
+        this.express.use(require('./router'))
     }
     bodyParser() {
-        return (
-            this.express.use(bodyParser.urlencoded({ extended: false })),
-            this.express.use(bodyParser.json())
-        )
+        this.express.use(bodyParser.urlencoded({ extended: false }))
+        this.express.use(bodyParser.json())
     }
     templateEngine() {
-        return (
-            this.express.set('view engine', 'ejs'),
-            this.express.use(express.static('public')),
-            this.express.set('views', path.join('./src/app', 'views'))
-        )
+        this.express.set('view engine', 'ejs')
+        this.express.use(express.static(path.join('./src', 'public')))
+        this.express.set('views', path.join('./src/app', 'views'))
     }
     server() {
         return this.express.listen(8080, () => {
@@ -39,4 +34,3 @@ class AppController {
 }
 
 exports.module = new AppController()
-

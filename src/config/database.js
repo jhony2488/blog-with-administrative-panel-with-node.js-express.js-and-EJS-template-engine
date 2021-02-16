@@ -4,11 +4,11 @@ module.exports = {
     password: '',
     database: 'blog',
     dialect: 'mysql',
-    operatorsAliases: false,
     logging: false,
     define: {
         timestamps: true,
         underscore: true,
         underscoresAll: true,
+        freezeTableName: true,
     },
 }

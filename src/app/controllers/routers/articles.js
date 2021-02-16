@@ -1,9 +1,15 @@
+const Categories = require('../../models/Article')
+const slugify = require('slugify')
+
 class ArticlesControllers {
     articles(req, res) {
         res.send('index')
     }
-    adminArticle(req, res) {
-        res.send('jhonyyyy')
+    adminArticles(req, res) {
+        res.render('admin/articles/new')
+    }
+    adminArticleNew(req, res) {
+        res.render('admin/articles/new')
     }   
 }
 
