@@ -8,7 +8,7 @@
         "dev": "nodemon ./src/server.js",
         "test": "jest",
         "run-migrations": "sequelize-cli db:migrate",
-        "undo-migrations":"sequelize-cli db:migrate:undo:all",
+        "undo-migrations": "sequelize-cli db:migrate:undo:all",
         "create-migration-users": "sequelize-cli migration:create --name=create-users",
         "create-migration-articles": "sequelize-cli migration:create --name=create-articles",
         "create-migration-categories": "sequelize-cli migration:create --name=create-categories"
@@ -16,9 +16,11 @@
     "author": "Jhonata Vinicius",
     "license": "ISC",
     "dependencies": {
+        "bcryptjs": "^2.4.3",
         "body-parser": "^1.19.0",
         "ejs": "^3.1.5",
         "express": "^4.17.1",
+        "express-session": "^1.17.1",
         "mysql2": "^2.2.5",
         "sequelize": "^6.5.0",
         "slugify": "^1.4.6"
