@@ -1,34 +1,56 @@
 <%- include('../../partials/head.ejs') %>
-<body>
+<body onload="tinymceFunction('<%= article.body %>')">
     <%- include('../../partials/navbar.ejs') %>
     <div class="container">
         <hr />
         <div class="card">
             <div class="card-header">
-                <h2 class="text-center">Criar Artigo</h2>
+                <h2 class="text-center">Editar Artigo</h2>
             </div>
             <div class="card-body">
-                <form action="save" method="POST">
+                <form
+                    action="/admin/articles/update/<%= article.id %>"
+                    method="POST"
+                >
                     <input
                         class="form-control"
                         type="text"
                         name="title"
                         placeholder="Defina o titulo da categoria"
+                        value="<%= article.title %>"
                     />
                     <br />
-                    <input
+                    <select name="category" class="form-control">
+                        <% categories.forEach((category)=>{%> <%
+                        if(category.id==article.categorieId){%>
+                        <option value="<%= category.id %>" selected>
+                            <%= category.title %>
+                        </option>
+                        <% } else{%>
+                        <option value="<%= category.id %>">
+                            <%= category.title %>
+                        </option>
+                        <% }%> <% })%>
+                    </select>
+                    <br />
+                    <textarea
                         class="form-control"
-                        type="text"
                         name="body"
-                        placeholder="Defina o titulo da categoria"
-                    />
+                        placeholder="Conteudo do artigo"
+                        id="body"
+                    ></textarea>
                     <br />
                     <button type="submit" class="btn btn-success">
-                        Criar Artigo
+                        Editar Artigo
                     </button>
                 </form>
             </div>
         </div>
     </div>
 </body>
+<script
+    src="https://cdn.tiny.cloud/1/sxzzv5k4yfxy9t0blotia1yn0izkgqzwohjr0mrk5wqqyfyn/tinymce/5/tinymce.min.js"
+    referrerpolicy="origin"
+></script>
+<script src="/js/tinymce.js"></script>
 <%- include('../../partials/footer.ejs') %>

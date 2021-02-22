@@ -1,5 +1,5 @@
-function confirmDeletion(event) {
-    let confirmDecision = confirm('Voce quer deletar essa categoria ?')
+function confirmDeletion(event, fraseConfirm) {
+    let confirmDecision = confirm(fraseConfirm)
     if (confirmDecision) {
         return true
     }

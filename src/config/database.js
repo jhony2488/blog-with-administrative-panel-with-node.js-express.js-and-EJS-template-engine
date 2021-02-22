@@ -5,6 +5,7 @@ module.exports = {
     database: 'blog',
     dialect: 'mysql',
     logging: false,
+    timezone: '-03:00',
     define: {
         timestamps: true,
         underscore: true,

@@ -1,0 +1,54 @@
+<%- include('../../partials/head.ejs') %>
+<body>
+    <%- include('../../partials/navbar.ejs') %>
+    <div class="container">
+        <br />
+        <h2 class="text-center">Artigos</h2>
+        <div class="text-center">
+            <a href="/admin/articles/new" class="btn btn-success">
+                Criar Novos Articos
+            </a>
+        </div>
+        <br />
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Titulo</th>
+                    <th>Slug</th>
+                    <th>Categoria</th>
+                    <th>Açōes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% articles.forEach((article)=>{ %>
+                <tr>
+                    <th><%= article.id %></th>
+                    <th><%= article.title %></th>
+                    <th><%= article.slug %></th>
+                    <th><%= article.categories.title %></th>
+                    <th class="col-2">
+                        <div class="d-inline">
+                            <a
+                                href="/admin/articles/edit/<%= article.id %>"
+                                class="text-center btn btn-primary"
+                                >Editar</a
+                            >
+                        </div>
+                        <div class="d-inline">
+                            <a
+                                href="/admin/articles/delete/<%= article.id %>/categorie/<%= article.categories.id  %> "
+                                class="text-center btn btn-danger"
+                                onclick="confirmDeletion(event,'Voce quer deletar esse artigo ?')"
+                                >Deletar</a
+                            >
+                        </div>
+                    </th>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+<script src="/js/confirm.js"></script>
+<%- include('../../partials/footer.ejs') %>

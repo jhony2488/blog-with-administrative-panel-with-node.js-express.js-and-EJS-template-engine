@@ -8,14 +8,14 @@ module.exports = (sequelize, DataTypes) => {
         },
         {
             freezeTableName: true,
-            tableName: 'articles',
+            tableName: 'users',
             timestamps: true,
         }
     )
     Users.associate = function (models) {
         Users.hasMany(models.Article, {
-            foreignKey: 'id',
-            as: 'articles',
+            foreignKey: 'usersId',
+            as: 'articlesUser',
         })
     }
     return Users

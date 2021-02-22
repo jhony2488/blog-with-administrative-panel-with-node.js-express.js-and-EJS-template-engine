@@ -14,10 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     )
     Articles.associate = function (models) {
         Articles.belongsTo(models.Categorie, {
-            foreignKey: 'id',
+            foreignKey: 'categorieId',
             as: 'categories',
         })
     }
-
     return Articles
 }

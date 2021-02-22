@@ -5,7 +5,9 @@
         <br />
         <h2 class="text-center">Categorias</h2>
         <div class="text-center">
-            <a href="new" class="btn btn-success"> Criar Novas Categorias </a>
+            <a href="/admin/categories/new" class="btn btn-success">
+                Criar Novas Categorias
+            </a>
         </div>
         <br />
         <table class="table table-bordered">
@@ -35,7 +37,7 @@
                             <a
                                 href="/admin/categories/delete/<%= category.id %>"
                                 class="text-center btn btn-danger"
-                                onclick="confirmDeletion(event)"
+                                onclick="confirmDeletion(event, 'Voce quer deletar essa categoria ?')"
                                 >Deletar</a
                             >
                         </div>

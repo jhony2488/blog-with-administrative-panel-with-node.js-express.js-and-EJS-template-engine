@@ -5,7 +5,7 @@ class CategoriesControllers {
     categories(req, res) {
         res.send('index')
     }
-    categoriesSave(req, res) {
+    async categoriesSave(req, res) {
         let title = req.body.title
         if (title == undefined || title == null || title == NaN) {
             res.redirect('admin/categories/new')
@@ -18,7 +18,7 @@ class CategoriesControllers {
             })
         }
     }
-    categoriesUpdated(req, res) {
+    async categoriesUpdated(req, res) {
         let id = req.params.id
         let title = req.body.title
         if (
@@ -42,7 +42,7 @@ class CategoriesControllers {
             })
         }
     }
-    categoriesDelete(req, res) {
+    async categoriesDelete(req, res) {
         let id = req.params.id
         if (id == undefined || id == null || id == NaN || isNaN(id)) {
             res.redirect('admin/categories/')
@@ -57,10 +57,10 @@ class CategoriesControllers {
         }
     }
 
-    adminCategorie(req, res) {
+    async adminCategorie(req, res) {
         res.render('admin/categories/new')
     }
-    adminCategorieEdit(req, res) {
+    async adminCategorieEdit(req, res) {
         let id = req.params.id
         let category
         Categorie.findOne({
@@ -79,7 +79,7 @@ class CategoriesControllers {
                 res.redirect('admin/categories/')
             })
     }
-    adminCategories(req, res) {
+    async adminCategories(req, res) {
         Categorie.findAll()
             .then((categories) => {
                 res.render('admin/categories/index', { categories })

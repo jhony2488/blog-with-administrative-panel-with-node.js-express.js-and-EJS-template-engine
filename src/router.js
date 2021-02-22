@@ -4,23 +4,31 @@ const routerCategories = require('./app/controllers/routers/Categories')
 
 const router = express.Router()
 
-router.get('/', (req, res) => {
-    res.json({ version: '1.0.0' })
-})
+router.get('/', routerArticles.home)
 
-router.get('/articles', routerArticles.articles)
+router.get('/article/:slug_article', routerArticles.articleUnic)
+
+router.get('/category/:slug_category', routerArticles.categoryUnic)
+
+router.get(
+    '/category/:slug_category/article/:slug_article',
+    routerArticles.categoryUnicArticleUnic
+)
 
 router.get('/admin/articles/', routerArticles.adminArticles)
 
 router.get('/admin/articles/new', routerArticles.adminArticleNew)
 
-router.get('/admin/articles/edit/:id', routerCategories.adminCategorieEdit)
+router.get('/admin/articles/edit/:id', routerArticles.adminArticleEdit)
 
-router.post('/admin/articles/save', routerCategories.categoriesSave)
+router.post('/admin/articles/save', routerArticles.articleSave)
 
-router.post('/admin/articles/update/:id', routerCategories.categoriesUpdated)
+router.post('/admin/articles/update/:id', routerArticles.articlesUpdated)
 
-router.get('/admin/articles/delete/:id', routerCategories.categoriesDelete)
+router.get(
+    '/admin/articles/delete/:id/categorie/:id_categorie',
+    routerArticles.articlesDelete
+)
 
 router.get('/categories', routerCategories.categories)
 

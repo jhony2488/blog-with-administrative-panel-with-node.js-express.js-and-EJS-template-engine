@@ -1,5 +1,5 @@
 <%- include('../../partials/head.ejs') %>
-<body>
+<body onload="tinymceFunction(null)">
     <%- include('../../partials/navbar.ejs') %>
     <div class="container">
         <hr />
@@ -16,11 +16,20 @@
                         placeholder="Defina o titulo do artigo"
                     />
                     <br />
+                    <select name="category" class="form-control">
+                        <% categories.forEach((category)=>{%>
+                        <option value="<%= category.id %>">
+                            <%= category.title %>
+                        </option>
+                        <% })%>
+                    </select>
+                    <br />
                     <textarea
                         class="form-control"
                         name="body"
                         placeholder="Conteudo do artigo"
-                    />
+                        id="body"
+                    ></textarea>
                     <br />
                     <button type="submit" class="btn btn-success">
                         Criar Artigo
@@ -30,4 +39,9 @@
         </div>
     </div>
 </body>
+<script
+    src="https://cdn.tiny.cloud/1/sxzzv5k4yfxy9t0blotia1yn0izkgqzwohjr0mrk5wqqyfyn/tinymce/5/tinymce.min.js"
+    referrerpolicy="origin"
+></script>
+<script src="/js/tinymce.js"></script>
 <%- include('../../partials/footer.ejs') %>
