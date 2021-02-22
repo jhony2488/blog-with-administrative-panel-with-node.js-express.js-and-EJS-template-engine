@@ -6,13 +6,15 @@ const router = express.Router()
 
 router.get('/', routerArticles.home)
 
+router.get('/articles/page/:page', routerArticles.navigation)
+
 router.get('/article/:slug_article', routerArticles.articleUnic)
 
 router.get('/category/:slug_category', routerArticles.categoryUnic)
 
 router.get(
     '/category/:slug_category/article/:slug_article',
-    routerArticles.categoryUnicArticleUnic
+    routerArticles.articleUnic
 )
 
 router.get('/admin/articles/', routerArticles.adminArticles)

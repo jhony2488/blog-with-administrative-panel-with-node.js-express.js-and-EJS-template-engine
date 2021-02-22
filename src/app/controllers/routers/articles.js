@@ -4,9 +4,55 @@ const slugify = require('slugify')
 
 class ArticlesControllers {
     async home(req, res) {
+        const page = 0
+        let offset = 0
+        let limit = 4
         let category = await Categorie.findAll()
 
-        Article.findAll({
+        Article.findAndCountAll({
+            order: [
+                ['id', 'DESC'],
+                ['title', 'ASC'],
+            ],
+            limit,
+            offset,
+            include: ['categories'],
+        })
+            .then((articles) => {
+                let next
+                if (offset + limit >= articles.count) {
+                    next = false
+                } else {
+                    next = true
+                }
+                let result = {
+                    page,
+                    next,
+                }
+                res.render('home', {
+                    articles,
+                    categories: category,
+                    next: result.next,
+                    page: result.page,
+                })
+            })
+            .catch((error) => {
+                res.json({ response: 'ocorreu um erro', error })
+            })
+    }
+    async navigation(req, res) {
+        const page = req.params.page
+        let offset = 0
+        let limit = 4
+        if (isNaN(page) || page == 1) {
+            offset = 0
+        } else {
+            offset = (parseInt(page) - 1) * limit
+        }
+        let category = await Categorie.findAll()
+        Article.findAndCountAll({
+            limit,
+            offset,
             order: [
                 ['id', 'DESC'],
                 ['title', 'ASC'],
@@ -14,12 +60,30 @@ class ArticlesControllers {
             include: ['categories'],
         })
             .then((articles) => {
-                res.render('home', { articles, categories: category })
+                let next
+                if (offset + limit >= articles.count) {
+                    next = false
+                } else {
+                    next = true
+                }
+                let result = {
+                    page,
+                    next,
+                    articles,
+                }
+
+                res.render('page', {
+                    next,
+                    page: parseInt(result.page),
+                    articles: result.articles.rows,
+                    categories: category,
+                })
             })
             .catch((error) => {
-                res.json({ response: 'ocorreu um erro', error })
+                res.json(error)
             })
     }
+
     async articleUnic(req, res) {
         const { slug_article } = req.params
         let category = await Categorie.findAll()
@@ -27,6 +91,7 @@ class ArticlesControllers {
             where: {
                 slug: slug_article,
             },
+            include: ['categories'],
         })
             .then((article) => {
                 res.render('article', { article, categories: category })
@@ -64,23 +129,6 @@ class ArticlesControllers {
             })
             .catch((error) => {
                 res.json(error)
-            })
-    }
-    async categoryUnicArticleUnic(req, res) {
-        const { slug_category, slug_article } = req.params
-        let category = await Categorie.findOne({ slug: slug_category })
-        let categorys = await Categorie.findAll()
-        Article.findOne({
-            where: {
-                slug: slug_article,
-                categorieId: category.id,
-            },
-        })
-            .then((article) => {
-                res.render('article', { article, categories: categorys })
-            })
-            .catch((error) => {
-                res.redirect('/')
             })
     }
     async adminArticles(req, res) {

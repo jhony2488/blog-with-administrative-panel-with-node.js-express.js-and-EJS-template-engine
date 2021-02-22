@@ -5,17 +5,7 @@
     <br />
     <div class="container">
         <br />
-        <div class="jumbotron">
-            <h1 class="display-4">Bem Vindo(a)</h1>
-            <p class="lead">Este e um simples blog</p>
-            <hr class="my-4" />
-            <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button"
-                    >Learn more</a
-                >
-            </p>
-        </div>
-        <% articles.rows.forEach((article)=>{ %>
+        <% articles.forEach((article)=>{ %>
         <div class="card text-center">
             <div class="card-header">
                 <h2 class="card-title"><%= article.title %></h2>
@@ -36,8 +26,8 @@
                     <<<<<<< Prev
                 </a>
                 <%}%> <% if(next){%>
-                <a href="/articles/page/2" style="float: right">
-                    Next >>>>
+                <a href="/articles/page/<%= page + 1 %>" style="float: right">
+                    Next>>>>
                 </a>
                 <%}%>
             </div>
